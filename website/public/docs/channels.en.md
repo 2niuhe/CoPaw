@@ -498,16 +498,16 @@ The Mattermost channel uses WebSockets for real-time monitoring and REST APIs fo
 
 ### Core Config
 
-| Field | Description | Default |
-| --- | --- | --- |
-| **url** | Full URL of your Mattermost instance | - |
-| **bot_token** | Bot Access Token | - |
-| **show_typing** | Whether to show the "typing..." indicator | `true` |
-| **thread_follow_without_mention** | Whether to respond without @mention in threads the bot has already joined | `false` |
-| **dm_policy** | DM policy: `open` (allow all) or `allowlist` (whitelist only) | `"open"` |
-| **group_policy** | Group policy: `open` (allow all) or `allowlist` (whitelist only) | `"open"` |
-| **allow_from** | List of allowed User IDs (effective if policy is `allowlist`) | `[]` |
-| **deny_message** | Automatic reply when access is denied by the whitelist | `""` |
+| Field                             | Description                                                               | Default  |
+| --------------------------------- | ------------------------------------------------------------------------- | -------- |
+| **url**                           | Full URL of your Mattermost instance                                      | -        |
+| **bot_token**                     | Bot Access Token                                                          | -        |
+| **show_typing**                   | Whether to show the "typing..." indicator                                 | `true`   |
+| **thread_follow_without_mention** | Whether to respond without @mention in threads the bot has already joined | `false`  |
+| **dm_policy**                     | DM policy: `open` (allow all) or `allowlist` (whitelist only)             | `"open"` |
+| **group_policy**                  | Group policy: `open` (allow all) or `allowlist` (whitelist only)          | `"open"` |
+| **allow_from**                    | List of allowed User IDs (effective if policy is `allowlist`)             | `[]`     |
+| **deny_message**                  | Automatic reply when access is denied by the whitelist                    | `""`     |
 
 > **Note**: The `session_id` for Mattermost is fixed as `mattermost_dm:{mm_channel_id}` for DMs and isolated by Thread ID for group chats. Recent history is automatically fetched as context supplement only upon the first trigger of a session.
 
@@ -581,15 +581,15 @@ JSON message format
 
 ### Config overview
 
-| Channel  | Config key | Main fields                                                             |
-| -------- | ---------- | ----------------------------------------------------------------------- |
-| DingTalk | dingtalk   | client_id, client_secret                                                |
-| Feishu   | feishu     | app_id, app_secret; optional encrypt_key, verification_token, media_dir |
-| iMessage | imessage   | db_path, poll_sec (macOS only)                                          |
-| Discord  | discord    | bot_token; optional http_proxy, http_proxy_auth                         |
-| QQ       | qq         | app_id, client_secret                                                   |
-| Telegram | telegram   | bot_token; optional http_proxy, http_proxy_auth                         |
-| Mattermost| mattermost| url, bot_token; optional show_typing, dm_policy, allow_from             |
+| Channel    | Config key | Main fields                                                             |
+| ---------- | ---------- | ----------------------------------------------------------------------- |
+| DingTalk   | dingtalk   | client_id, client_secret                                                |
+| Feishu     | feishu     | app_id, app_secret; optional encrypt_key, verification_token, media_dir |
+| iMessage   | imessage   | db_path, poll_sec (macOS only)                                          |
+| Discord    | discord    | bot_token; optional http_proxy, http_proxy_auth                         |
+| QQ         | qq         | app_id, client_secret                                                   |
+| Telegram   | telegram   | bot_token; optional http_proxy, http_proxy_auth                         |
+| Mattermost | mattermost | url, bot_token; optional show_typing, dm_policy, allow_from             |
 
 Field details and structure are in the tables above and [Config & working dir](./config).
 
@@ -600,15 +600,15 @@ video, audio, and file varies by channel.
 **✓** = supported. **🚧** = under construction (implementable but not yet
 done). **✗** = not supported (not possible on this channel).
 
-| Channel  | Recv text | Recv image | Recv video | Recv audio | Recv file | Send text | Send image | Send video | Send audio | Send file |
-| -------- | --------- | ---------- | ---------- | ---------- | --------- | --------- | ---------- | ---------- | ---------- | --------- |
-| DingTalk | ✓         | ✓          | ✓          | ✓          | ✓         | ✓         | ✓          | ✓          | ✓          | ✓         |
-| Feishu   | ✓         | ✓          | ✓          | ✓          | ✓         | ✓         | ✓          | ✓          | ✓          | ✓         |
-| Discord  | ✓         | ✓          | ✓          | ✓          | ✓         | ✓         | 🚧         | 🚧         | 🚧         | 🚧        |
-| iMessage | ✓         | ✗          | ✗          | ✗          | ✗         | ✓         | ✗          | ✗          | ✗          | ✗         |
-| QQ       | ✓         | 🚧         | 🚧         | 🚧         | 🚧        | ✓         | 🚧         | 🚧         | 🚧         | 🚧        |
-| Telegram | ✓         | ✓          | ✓          | ✓          | ✓         | ✓         | ✓          | ✓          | ✓          | ✓         |
-| Mattermost| ✓        | ✓          | 🚧         | 🚧         | ✓         | ✓         | ✓          | 🚧         | 🚧         | ✓         |
+| Channel    | Recv text | Recv image | Recv video | Recv audio | Recv file | Send text | Send image | Send video | Send audio | Send file |
+| ---------- | --------- | ---------- | ---------- | ---------- | --------- | --------- | ---------- | ---------- | ---------- | --------- |
+| DingTalk   | ✓         | ✓          | ✓          | ✓          | ✓         | ✓         | ✓          | ✓          | ✓          | ✓         |
+| Feishu     | ✓         | ✓          | ✓          | ✓          | ✓         | ✓         | ✓          | ✓          | ✓          | ✓         |
+| Discord    | ✓         | ✓          | ✓          | ✓          | ✓         | ✓         | 🚧         | 🚧         | 🚧         | 🚧        |
+| iMessage   | ✓         | ✗          | ✗          | ✗          | ✗         | ✓         | ✗          | ✗          | ✗          | ✗         |
+| QQ         | ✓         | 🚧         | 🚧         | 🚧         | 🚧        | ✓         | 🚧         | 🚧         | 🚧         | 🚧        |
+| Telegram   | ✓         | ✓          | ✓          | ✓          | ✓         | ✓         | ✓          | ✓          | ✓          | ✓         |
+| Mattermost | ✓         | ✓          | 🚧         | 🚧         | ✓         | ✓         | ✓          | 🚧         | 🚧         | ✓         |
 
 Notes:
 

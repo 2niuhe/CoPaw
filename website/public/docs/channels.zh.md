@@ -494,16 +494,16 @@ Mattermost 频道通过 WebSocket 实时监听事件，并使用 REST API 发送
 
 ### 核心配置
 
-| 字段 | 说明 | 默认值 |
-| --- | --- | --- |
-| **url** | Mattermost 实例的完整地址 | - |
-| **bot_token** | 机器人的 Access Token | - |
-| **show_typing** | 是否开启「正在输入...」状态指示 | `true` |
-| **thread_follow_without_mention** | 在群聊已参与的 Thread 中，是否在后续无 @ 消息时也触发回复 | `false` |
-| **dm_policy** | 私聊策略：`open` (全部允许) 或 `allowlist` (仅白名单) | `"open"` |
-| **group_policy** | 群聊策略：`open` (全部允许) 或 `allowlist` (仅白名单) | `"open"` |
-| **allow_from** | 允许的用户 ID 列表 (仅在策略为 `allowlist` 时生效) | `[]` |
-| **deny_message** | 被拒绝访问时的自动回复消息 | `""` |
+| 字段                              | 说明                                                      | 默认值   |
+| --------------------------------- | --------------------------------------------------------- | -------- |
+| **url**                           | Mattermost 实例的完整地址                                 | -        |
+| **bot_token**                     | 机器人的 Access Token                                     | -        |
+| **show_typing**                   | 是否开启「正在输入...」状态指示                           | `true`   |
+| **thread_follow_without_mention** | 在群聊已参与的 Thread 中，是否在后续无 @ 消息时也触发回复 | `false`  |
+| **dm_policy**                     | 私聊策略：`open` (全部允许) 或 `allowlist` (仅白名单)     | `"open"` |
+| **group_policy**                  | 群聊策略：`open` (全部允许) 或 `allowlist` (仅白名单)     | `"open"` |
+| **allow_from**                    | 允许的用户 ID 列表 (仅在策略为 `allowlist` 时生效)        | `[]`     |
+| **deny_message**                  | 被拒绝访问时的自动回复消息                                | `""`     |
 
 > **提示**：Mattermost 的 `session_id` 在私聊中固定为 `mattermost_dm:{mm_channel_id}`，在群聊中按 Thread ID 隔离回话。仅在 Session 首次触发时会自动拉取最近的历史记录作为上下文补全。
 
@@ -577,15 +577,15 @@ JSON消息格式
 
 ### 配置总览
 
-| 频道     | 配置键   | 必填/主要字段                                                       |
-| -------- | -------- | ------------------------------------------------------------------- |
-| 钉钉     | dingtalk | client_id, client_secret                                            |
-| 飞书     | feishu   | app_id, app_secret；可选 encrypt_key, verification_token, media_dir |
-| iMessage | imessage | db_path, poll_sec（仅 macOS）                                       |
-| Discord  | discord  | bot_token；可选 http_proxy, http_proxy_auth                         |
-| QQ       | qq       | app_id, client_secret                                               |
-| Telegram | telegram | bot_token；可选 http_proxy, http_proxy_auth                         |
-| Mattermost| mattermost| url, bot_token; 可选 show_typing, dm_policy, allow_from             |
+| 频道       | 配置键     | 必填/主要字段                                                       |
+| ---------- | ---------- | ------------------------------------------------------------------- |
+| 钉钉       | dingtalk   | client_id, client_secret                                            |
+| 飞书       | feishu     | app_id, app_secret；可选 encrypt_key, verification_token, media_dir |
+| iMessage   | imessage   | db_path, poll_sec（仅 macOS）                                       |
+| Discord    | discord    | bot_token；可选 http_proxy, http_proxy_auth                         |
+| QQ         | qq         | app_id, client_secret                                               |
+| Telegram   | telegram   | bot_token；可选 http_proxy, http_proxy_auth                         |
+| Mattermost | mattermost | url, bot_token; 可选 show_typing, dm_policy, allow_from             |
 
 各频道字段与完整结构见上文表格及 [配置与工作目录](./config)。
 
@@ -594,15 +594,15 @@ JSON消息格式
 不同频道对「文本 / 图片 / 视频 / 音频 / 文件」的**接收**（用户发给机器人）与**发送**（机器人回复用户）支持程度如下。
 「✓」= 已支持；「🚧」= 施工中（可实现但尚未实现）；「✗」= 不支持（该频道本身无法支持）。
 
-| 频道     | 接收文本 | 接收图片 | 接收视频 | 接收音频 | 接收文件 | 发送文本 | 发送图片 | 发送视频 | 发送音频 | 发送文件 |
-| -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
-| 钉钉     | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        |
-| 飞书     | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        |
-| Discord  | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | 🚧       | 🚧       | 🚧       | 🚧       |
-| iMessage | ✓        | ✗        | ✗        | ✗        | ✗        | ✓        | ✗        | ✗        | ✗        | ✗        |
-| QQ       | ✓        | 🚧       | 🚧       | 🚧       | 🚧       | ✓        | 🚧       | 🚧       | 🚧       | 🚧       |
-| Telegram | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        |
-| Mattermost| ✓       | ✓        | 🚧       | 🚧       | ✓        | ✓        | ✓        | 🚧       | 🚧       | ✓        |
+| 频道       | 接收文本 | 接收图片 | 接收视频 | 接收音频 | 接收文件 | 发送文本 | 发送图片 | 发送视频 | 发送音频 | 发送文件 |
+| ---------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| 钉钉       | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        |
+| 飞书       | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        |
+| Discord    | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | 🚧       | 🚧       | 🚧       | 🚧       |
+| iMessage   | ✓        | ✗        | ✗        | ✗        | ✗        | ✓        | ✗        | ✗        | ✗        | ✗        |
+| QQ         | ✓        | 🚧       | 🚧       | 🚧       | 🚧       | ✓        | 🚧       | 🚧       | 🚧       | 🚧       |
+| Telegram   | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        | ✓        |
+| Mattermost | ✓        | ✓        | 🚧       | 🚧       | ✓        | ✓        | ✓        | 🚧       | 🚧       | ✓        |
 
 说明：
 
